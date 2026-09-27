@@ -19,7 +19,7 @@ export const App: React.FC = () => {
   useLenis();
 
   return (
-    <div className="relative min-h-screen w-full max-w-[100vw] overflow-x-hidden bg-[#050816] text-[#F8FAFC] font-body selection:bg-violet/30 selection:text-white">
+    <div className="relative min-h-screen w-full max-w-full overflow-x-hidden bg-[#050816] text-[#F8FAFC] font-body selection:bg-violet/30 selection:text-white">
       {/* Interactive desktop cursor */}
       <CustomCursor />
 
