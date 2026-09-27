@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion, AnimatePresence, useScroll, useSpring } from 'framer-motion';
 import { Button } from '../ui/Button';
 import { Menu, X, Send } from 'lucide-react';
 
@@ -8,7 +8,6 @@ const links = [
   { name: 'Skills', href: '#skills' },
   { name: 'Experience', href: '#experience' },
   { name: 'Projects', href: '#projects' },
-  { name: 'Certifications', href: '#certifications' },
   { name: 'Contact', href: '#contact' },
 ];
 
@@ -16,6 +15,13 @@ export const Nav: React.FC = () => {
   const [scrolled, setScrolled] = useState(false);
   const [activeSection, setActiveSection] = useState('');
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
+  const { scrollYProgress } = useScroll();
+  const scaleX = useSpring(scrollYProgress, {
+    stiffness: 100,
+    damping: 30,
+    restDelta: 0.001
+  });
 
   useEffect(() => {
     const handleScroll = () => {
@@ -60,7 +66,7 @@ export const Nav: React.FC = () => {
     setMobileMenuOpen(false);
     const section = document.querySelector(href);
     if (section) {
-      const offsetTop = section.getBoundingClientRect().top + window.scrollY - 75;
+      const offsetTop = section.getBoundingClientRect().top + window.scrollY - 110;
       window.scrollTo({
         top: offsetTop,
         behavior: 'smooth',
@@ -84,6 +90,11 @@ export const Nav: React.FC = () => {
             : 'bg-transparent py-5 border-b border-transparent'
         }`}
       >
+        {/* Scroll Progress Indicator */}
+        <motion.div
+          className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-neon-cyan via-violet to-electric-blue origin-left z-50 shadow-[0_0_15px_rgba(6,182,212,0.8)]"
+          style={{ scaleX }}
+        />
         <div className="max-w-7xl mx-auto px-6 flex items-center justify-between">
           {/* Logo */}
           <div 
@@ -143,46 +154,59 @@ export const Nav: React.FC = () => {
         </div>
       </header>
 
-      {/* Mobile Menu Fullscreen Overlay */}
+      {/* Mobile Menu Side Drawer */}
       <AnimatePresence>
         {mobileMenuOpen && (
-          <motion.div
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
-            transition={{ duration: 0.3 }}
-            className="fixed inset-0 bg-[#050816]/98 z-40 flex flex-col items-center justify-center pointer-events-auto md:hidden"
-          >
-            <nav className="flex flex-col items-center gap-6 mb-8">
-              {links.map((link, idx) => (
-                <motion.button
-                  key={link.name}
-                  initial={{ opacity: 0, y: 15 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: idx * 0.06, ease: 'easeOut' }}
-                  onClick={() => handleLinkClick(link.href)}
-                  className="font-display text-2xl font-bold text-text-secondary hover:text-text-primary transition-colors cursor-pointer"
-                >
-                  {link.name}
-                </motion.button>
-              ))}
-            </nav>
+          <>
+            {/* Backdrop */}
             <motion.div
-              initial={{ opacity: 0, scale: 0.9 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ delay: links.length * 0.06 }}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              onClick={() => setMobileMenuOpen(false)}
+              className="fixed inset-0 bg-black/50 backdrop-blur-sm z-40 md:hidden"
+            />
+            
+            {/* Drawer */}
+            <motion.div
+              initial={{ x: '100%' }}
+              animate={{ x: 0 }}
+              exit={{ x: '100%' }}
+              transition={{ type: 'spring', stiffness: 300, damping: 30 }}
+              className="fixed top-0 right-0 h-full w-[70%] sm:w-[50%] max-w-[320px] bg-[#0A0F1C]/95 backdrop-blur-2xl border-l border-white/10 shadow-2xl z-40 flex flex-col pt-28 pb-8 px-8 pointer-events-auto md:hidden overflow-y-auto"
             >
-              <Button
-                variant="primary"
-                magnetic={false}
-                onClick={() => handleLinkClick('#contact')}
-                className="px-8 py-3 rounded-full flex items-center gap-2 bg-gradient-to-r from-electric-blue via-indigo-600 to-violet text-white shadow-[0_0_20px_rgba(139,92,246,0.4)]"
+              <nav className="flex flex-col gap-6 mb-10 w-full">
+                {links.map((link, idx) => (
+                  <motion.button
+                    key={link.name}
+                    initial={{ opacity: 0, x: 20 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ delay: 0.1 + idx * 0.05, ease: 'easeOut' }}
+                    onClick={() => handleLinkClick(link.href)}
+                    className="font-display text-xl font-bold text-text-secondary hover:text-white transition-colors cursor-pointer text-left w-full border-b border-white/5 pb-3"
+                  >
+                    {link.name}
+                  </motion.button>
+                ))}
+              </nav>
+              <motion.div
+                initial={{ opacity: 0, scale: 0.9 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ delay: 0.1 + links.length * 0.05 }}
+                className="w-full mt-auto"
               >
-                <Send size={14} className="rotate-45" />
-                <span>Let's Talk</span>
-              </Button>
+                <Button
+                  variant="primary"
+                  magnetic={false}
+                  onClick={() => handleLinkClick('#contact')}
+                  className="w-full py-3.5 rounded-xl flex items-center justify-center gap-2 bg-gradient-to-r from-electric-blue via-indigo-600 to-violet text-white shadow-[0_0_20px_rgba(139,92,246,0.4)]"
+                >
+                  <Send size={14} className="rotate-45" />
+                  <span>Let's Talk</span>
+                </Button>
+              </motion.div>
             </motion.div>
-          </motion.div>
+          </>
         )}
       </AnimatePresence>
     </>

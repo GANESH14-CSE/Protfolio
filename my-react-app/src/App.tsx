@@ -19,7 +19,7 @@ export const App: React.FC = () => {
   useLenis();
 
   return (
-    <div className="relative min-h-screen bg-[#050816] text-[#F8FAFC] font-body selection:bg-violet/30 selection:text-white">
+    <div className="relative min-h-screen w-full max-w-[100vw] overflow-x-hidden bg-[#050816] text-[#F8FAFC] font-body selection:bg-violet/30 selection:text-white">
       {/* Interactive desktop cursor */}
       <CustomCursor />
 
@@ -30,7 +30,7 @@ export const App: React.FC = () => {
       <Nav />
 
       {/* Core sections layout */}
-      <main className="relative z-10 w-full overflow-x-hidden pt-16 md:pt-20 px-4 sm:px-6 max-w-7xl mx-auto space-y-20">
+      <main className="relative z-10 w-full overflow-x-hidden pt-12 px-4 sm:px-6 max-w-7xl mx-auto space-y-12">
         <Hero />
         <About />
 

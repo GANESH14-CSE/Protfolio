@@ -9,7 +9,7 @@ export const Contact: React.FC = () => {
   return (
     <section 
       id="contact" 
-      className="relative py-20 sm:py-24 px-6 sm:px-12 my-12 rounded-[32px] bg-slate-900/40 border border-white/10 text-white overflow-hidden text-center shadow-[0_20px_60px_rgba(0,0,0,0.6)] backdrop-blur-2xl"
+      className="relative pt-32 pb-20 sm:pt-40 sm:pb-24 px-6 sm:px-12 my-12 rounded-[32px] bg-slate-900/40 border border-white/10 text-white overflow-hidden text-center shadow-[0_20px_60px_rgba(0,0,0,0.6)] backdrop-blur-2xl"
     >
       {/* Ambient Neon Backing Glows (Matching Dark Theme) */}
       <div className="absolute -top-24 -left-24 w-72 h-72 rounded-full bg-violet/20 blur-[100px] pointer-events-none" />

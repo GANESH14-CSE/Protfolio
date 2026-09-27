@@ -100,7 +100,7 @@ export const HeroVisual: React.FC = () => {
       <motion.div
         animate={{ y: [0, -8, 0] }}
         transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }}
-        className="absolute -top-6 -right-4 z-20 bg-[#0F172A]/95 border border-white/10 px-3.5 py-2 rounded-xl backdrop-blur-xl shadow-xl flex items-center gap-2.5"
+        className="absolute -top-6 -right-2 sm:-right-4 z-20 bg-[#0F172A]/95 border border-white/10 px-3.5 py-2 rounded-xl backdrop-blur-xl shadow-xl flex items-center gap-2.5 scale-90 sm:scale-100 origin-top-right"
       >
         <div className="p-1.5 bg-[#3776AB]/20 rounded-lg text-[#60A5FA]">
           <SiPython size={16} />
@@ -115,7 +115,7 @@ export const HeroVisual: React.FC = () => {
       <motion.div
         animate={{ y: [0, 8, 0] }}
         transition={{ duration: 4.5, repeat: Infinity, ease: 'easeInOut', delay: 0.5 }}
-        className="absolute -bottom-6 -left-4 z-20 bg-[#0F172A]/95 border border-white/10 px-3.5 py-2 rounded-xl backdrop-blur-xl shadow-xl flex items-center gap-2.5"
+        className="absolute -bottom-6 -left-2 sm:-left-4 z-20 bg-[#0F172A]/95 border border-white/10 px-3.5 py-2 rounded-xl backdrop-blur-xl shadow-xl flex items-center gap-2.5 scale-90 sm:scale-100 origin-bottom-left"
       >
         <div className="p-1.5 bg-violet/20 rounded-lg text-violet">
           <FaBrain size={16} />
@@ -130,7 +130,7 @@ export const HeroVisual: React.FC = () => {
       <motion.div
         animate={{ y: [0, -6, 0] }}
         transition={{ duration: 5, repeat: Infinity, ease: 'easeInOut', delay: 1 }}
-        className="absolute -bottom-4 right-6 z-20 hidden sm:flex bg-[#0F172A]/95 border border-white/10 px-3 py-1.5 rounded-xl backdrop-blur-xl shadow-xl items-center gap-2"
+        className="absolute -bottom-4 right-2 sm:right-6 z-20 flex bg-[#0F172A]/95 border border-white/10 px-3 py-1.5 rounded-xl backdrop-blur-xl shadow-xl items-center gap-2 scale-90 sm:scale-100 origin-bottom-right"
       >
         <SiReact size={14} className="text-[#61DAFB] animate-spin" style={{ animationDuration: '10s' }} />
         <span className="text-[11px] font-mono font-medium text-white">React.js + MySQL</span>

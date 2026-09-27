@@ -1,7 +1,8 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import HeroVisual from './HeroVisual';
+import ProfileCard from '../About/ProfileCard';
 import { Button } from '../ui/Button';
+import ScrambleText from '../ui/ScrambleText';
 import { Send, Eye } from 'lucide-react';
 import { FaGithub, FaLinkedin, FaEnvelope } from 'react-icons/fa';
 
@@ -9,7 +10,7 @@ export const Hero: React.FC = () => {
   return (
     <section 
       id="hero" 
-      className="relative min-h-[85vh] flex items-center justify-center pt-24 pb-12 overflow-hidden"
+      className="relative min-h-[85vh] flex items-center justify-center pt-10 pb-12 overflow-hidden"
     >
       {/* Sci-Fi Ambient Glow & Background Elements */}
       <div className="absolute inset-0 pointer-events-none select-none overflow-hidden z-0">
@@ -33,17 +34,17 @@ export const Hero: React.FC = () => {
       </div>
 
       {/* Hero Content Container */}
-      <div className="max-w-7xl mx-auto px-6 sm:px-10 w-full z-10 grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-14 items-center">
+      <div className="max-w-7xl mx-auto px-6 sm:px-10 w-full z-10 grid grid-cols-1 lg:grid-cols-12 gap-y-10 lg:gap-y-0 lg:gap-x-14 items-center">
         
-        {/* Left Column: Hero Text & Actions (col-span-7) */}
+        {/* Left Column: Hero Text (order-1 on mobile) */}
         <motion.div 
           initial={{ opacity: 0, x: -30 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.8, ease: [0.25, 0.1, 0.25, 1] }}
-          className="lg:col-span-7 flex flex-col text-left items-start"
+          className="lg:col-start-1 lg:col-span-7 flex flex-col text-left items-start order-1 lg:pb-6"
         >
           {/* Status Badge */}
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/[0.04] border border-white/10 mb-6 backdrop-blur-md shadow-[0_0_15px_rgba(16,185,129,0.15)]">
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/[0.04] border border-white/10 mb-6 backdrop-blur-md shadow-[0_0_15px_rgba(16,185,129,0.15)] hover:border-emerald-500/30 transition-colors">
             <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse shadow-[0_0_8px_rgba(16,185,129,0.8)]" />
             <span className="text-xs font-mono text-emerald-300 font-semibold tracking-wide">
               Available for Opportunities
@@ -53,20 +54,39 @@ export const Hero: React.FC = () => {
           {/* Headline */}
           <h1 className="font-display font-black text-4xl sm:text-6xl lg:text-[4.2rem] text-white leading-[1.08] tracking-tight mb-3">
             Hi, I'm <br />
-            <span className="bg-gradient-to-r from-violet via-electric-blue to-neon-cyan bg-clip-text text-transparent">
+            <span className="bg-gradient-to-r from-violet via-electric-blue to-neon-cyan bg-clip-text text-transparent animate-gradient-x inline-block pb-2">
               Ganesh Kutty S
             </span>
           </h1>
 
           {/* Subtitle */}
-          <p className="text-lg sm:text-xl font-medium text-neon-cyan mb-4">
-            Backend & AI Developer · Full Stack Specialist
+          <p className="text-lg sm:text-xl font-medium text-neon-cyan mb-4 font-mono">
+            <ScrambleText text="> Backend & AI Developer · Full Stack Specialist" delay={800} duration={2000} />
           </p>
 
           {/* Tagline */}
-          <p className="font-body text-text-secondary text-base sm:text-lg leading-relaxed max-w-xl mb-8">
+          <p className="font-body text-text-secondary text-base sm:text-lg leading-relaxed max-w-xl mb-0">
             Building scalable backend architectures, intelligent APIs, and production-grade machine learning solutions with clean code.
           </p>
+        </motion.div>
+
+        {/* Profile Card (order-2 on mobile, spans 2 rows on desktop) */}
+        <motion.div 
+          initial={{ opacity: 0, scale: 0.95 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.8, delay: 0.2 }}
+          className="lg:col-start-8 lg:col-span-5 lg:row-span-2 flex justify-center items-center relative py-2 lg:py-6 order-2"
+        >
+          <ProfileCard />
+        </motion.div>
+
+        {/* Actions & Social Links (order-3 on mobile) */}
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.3 }}
+          className="lg:col-start-1 lg:col-span-7 flex flex-col items-center sm:items-start w-full order-3"
+        >
 
           {/* CTA Buttons */}
           <div className="flex flex-wrap items-center gap-4 mb-8">
@@ -131,16 +151,6 @@ export const Hero: React.FC = () => {
             </a>
           </div>
 
-        </motion.div>
-
-        {/* Right Column: Hero Visual Card (col-span-5) */}
-        <motion.div 
-          initial={{ opacity: 0, scale: 0.95 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.8, delay: 0.2 }}
-          className="lg:col-span-5 flex justify-center items-center relative py-6"
-        >
-          <HeroVisual />
         </motion.div>
 
       </div>

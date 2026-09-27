@@ -13,7 +13,7 @@ export const experiences: ExperienceItem[] = [
     role: 'Python Django Developer Intern',
     company: 'M7 Corporation',
     location: 'Chennai, Tamil Nadu',
-    duration: 'Mar 2026 – Aug 2026',
+    duration: 'Mar 2026 – Sept 2026',
     details: [
       'Developed and maintained the backend of an LMS using Django and MySQL for student and course management.',
       'Integrated Razorpay payment gateway, WhatsApp API, and email automation to streamline operations.',
